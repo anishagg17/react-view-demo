@@ -1,26 +1,88 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-function App() {
+import {
+  useView,
+  Compiler,
+  Knobs,
+  Editor,
+  Error,
+  ActionButtons,
+  Placeholder,
+  PropTypes,
+} from "react-view";
+
+import { EuiButton } from "@elastic/eui";
+
+const testProps = {
+  color: {
+    defaultValue: {
+      computed: false,
+      value: "primary",
+    },
+    description: "`text` color is set for deprecation",
+    required: false,
+    type: {
+      name: "enum",
+      value: [
+        { value: "ghost", computed: false },
+        { value: "text", computed: false },
+      ],
+    },
+  },
+  fullWidth: {
+    description: "",
+    required: false,
+    type: { name: "bool" },
+  },
+};
+
+const modifiedProps = {
+  children: {
+    value: "Hello",
+    type: PropTypes.ReactNode,
+    description: "Visible label.",
+  },
+  color: {
+    defaultValue: "primary",
+    description: "`text` color is set for deprecation",
+    required: false,
+    options: { ghost: "ghost", text: "text" },
+    type: PropTypes.Enum,
+  },
+  fullWidth: {
+    description: "",
+    value: false,
+    type: PropTypes.Boolean,
+  },
+};
+
+const App = () => {
+  const params = useView({
+    componentName: "EuiButton",
+    props: modifiedProps,
+    scope: {
+      EuiButton,
+    },
+    imports: {
+      "@elastic/eui": {
+        named: ["EuiButton"],
+      },
+    },
+  });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <Compiler
+        {...params.compilerProps}
+        minHeight={62}
+        placeholder={Placeholder}
+      />
+      <Error msg={params.errorProps.msg} isPopup />
+      <Knobs {...params.knobProps} />
+      <Editor {...params.editorProps} />
+      <Error {...params.errorProps} />
+      <ActionButtons {...params.actions} />
+    </React.Fragment>
   );
-}
+};
 
 export default App;
