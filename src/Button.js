@@ -134,6 +134,7 @@ const Button = () => {
         placeholder="Placeholder text"
         value={child}
         onChange={(e) => {
+          setChild(e.target.value);
           params.knobProps.set(e.target.value, "children");
         }}
         aria-label="Use aria labels when no actual label is in use"
