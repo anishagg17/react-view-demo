@@ -68,7 +68,7 @@ const modifiedProps = {
 
 const Button = () => {
   const params = useView({
-    componentName: "EuiButton",
+    initialCode: "() => { return <EuiButton>Hello</EuiButton>;  }",
     props: modifiedProps,
     scope: {
       EuiButton,
