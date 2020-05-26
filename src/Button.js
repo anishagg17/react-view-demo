@@ -48,7 +48,9 @@ const testProps = {
 
 const modifiedProps = {
   children: {
-    value: "Hello",
+    value: `<div>One</div>
+    <div>Two</div>
+    <div>Three</div>`,
     type: PropTypes.ReactNode,
     description: "Visible label.",
   },
@@ -97,7 +99,7 @@ const Button = () => {
   ];
 
   const [radioIdSelected, setRadioIdSelected] = useState(`primary`);
-  const [child, setChild] = useState("Hello");
+  const [child, setChild] = useState(params.knobProps.state.children.value);
 
   const onChange = (optionId) => {
     // console.log(optionId);
@@ -130,15 +132,15 @@ const Button = () => {
         }}
       />
       <EuiSpacer />
-      <EuiFieldText
+      {/* <EuiFieldText
         placeholder="Placeholder text"
         value={child}
         onChange={(e) => {
-          setChild(e.target.value);
+          // setChild(e.target.value);
           params.knobProps.set(e.target.value, "children");
         }}
         aria-label="Use aria labels when no actual label is in use"
-      />
+      /> */}
       <EuiSpacer />
       {/* <Knobs {...params.knobProps} /> */}
       <EuiCodeEditor
