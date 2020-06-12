@@ -4,9 +4,9 @@ import "./index.css";
 import Button from "./Button";
 import * as serviceWorker from "./serviceWorker";
 import "@elastic/eui/dist/eui_theme_light.css";
-// import Modal from "./Modal";
+import Popover from "./Popover";
 
-ReactDOM.render(<Button />, document.getElementById("root"));
+ReactDOM.render(<Popover />, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
